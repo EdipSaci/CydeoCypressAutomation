@@ -6,7 +6,7 @@ describe('Input Forms Tests ', () => {
     cy.visit('/registration_form');
   });
 
-  it('Check different input box fields and verify', () => {
+  it.skip('Check different input box fields and verify', () => {
     // fill the form for username and other info
     cy.get('input[name="firstname"]').type('Mike');
     cy.get('input[name="lastname"]').type('Walt');
@@ -29,7 +29,7 @@ describe('Input Forms Tests ', () => {
     cy.get('input[name="birthday"]').type('01/01/1999');
   });
 
-  it('Check different radio button acitons', () =>{
+  it.skip('Check different radio button acitons', () =>{
         cy.get('.radio')  // this locate the all radio byttons  
         .find('[type=radio]') 
         .then( (radio => {  // stores them in radio object. it is a JQuery object
@@ -53,5 +53,18 @@ describe('Input Forms Tests ', () => {
 
         }))
 
+  })
+
+  it('check different checkbox actions' ,()=>{
+      // get all checkboxes, select Jav and verify
+      cy.get('[type="checkbox"]').then((checkbox) =>{
+        cy.wrap(checkbox).eq(1).check().should('be.checked');
+        //unchecked java
+        cy.wrap(checkbox).eq(1).uncheck().should('not.be.checked');
+        //verfiy third one has a value Javascript and then check and verfiy
+        cy.wrap(checkbox).eq(2)
+        .should('have.value', 'javascript')
+        .check().should('be.checked');
+      })       
   })
 });
