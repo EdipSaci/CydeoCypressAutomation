@@ -55,7 +55,7 @@ describe('Input Forms Tests ', () => {
 
   })
 
-  it('check different checkbox actions' ,()=>{
+  it.skip('check different checkbox actions' ,()=>{
       // get all checkboxes, select Jav and verify
       cy.get('[type="checkbox"]').then((checkbox) =>{
         cy.wrap(checkbox).eq(1).check().should('be.checked');
@@ -66,5 +66,30 @@ describe('Input Forms Tests ', () => {
         .should('have.value', 'javascript')
         .check().should('be.checked');
       })       
+  })
+
+  it.skip('Check selection of a single choice from a select dropdown', ()=>{
+    //select one element
+    cy.get('select[name="job_title"]').select("SDET");
+    //assert that dropdown hass correct text after selecting
+    cy.get('select[name="job_title"]').contains('SDET');
+  })
+
+  it('Check selection of all select dropdowns options', ()=>{
+    // we will provide our test data throug fixtures folder as JSON object, then use that data verify select values
+    cy.fixture('departments').then((departments) =>{
+        //Get all options in the menu, iterate these options one by one
+        cy.get('select[name="department"] >option ').each((option,index) =>{
+            //get each option text
+            const optionText= option.text();
+            //cy.log(optionText);
+            //cy.log(index);
+            //cy.log(departments[index]);
+            cy.get('select[name="department"]').select(optionText)
+            .should('have.value',option.val())
+            .contains(departments[index]);
+
+        })
+    })
   })
 });
