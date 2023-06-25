@@ -1,7 +1,6 @@
 /// <reference types="cypress" />
 
 describe('Cypress File Upload  Tests', () => {
-
   /**
    * Step 1:
    * In order to upload files in Cypress we need to install plugin
@@ -18,22 +17,21 @@ describe('Cypress File Upload  Tests', () => {
    * The file that you want to upload should be in your fixture folder
 
    */
- 
-  beforeEach('Navigate to upload page',() => {
+
+  beforeEach('Navigate to upload page', () => {
     // runs once before each test cases, beforeMethod in TestNg
     cy.clearCookies();
-    cy.visit('/upload')
+    cy.visit('/upload');
   });
 
   it('Check upload actions', () => {
-    //locator for choose file button
+    // locator for choose file button
     cy.get('input#file-upload').attachFile('shot.jpg');
-    //click on upload button
+    // click on upload button
     cy.get('#file-submit').click();
-    //assert that path message File Uploaded!
-    cy.get('#uploaded-files').then(()=>{
+    // assert that path message File Uploaded!
+    cy.get('#uploaded-files').then(() => {
       cy.contains('shot.jpg').should('be.visible');
-    })
+    });
   });
-  
 });
