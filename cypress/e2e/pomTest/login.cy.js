@@ -34,4 +34,10 @@ describe('Auth: Login user with different ways', () => {
     cy.textExists('You logged into a secure area!');
     auth.logout();
   });
+
+  it('Check invalid user credentials', () => {
+    auth.login('invalid234', 'invalid454'); // beauty of re-usability
+    //verify error message
+    cy.textExists('Your username is invalid!');
+  })
 });
