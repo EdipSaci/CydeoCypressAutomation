@@ -37,7 +37,7 @@ describe('Auth: Login user with different ways', () => {
 
   it('Check invalid user credentials', () => {
     auth.login('invalid234', 'invalid454'); // beauty of re-usability
-    //verify error message
+    // verify error message
     cy.textExists('Your username is invalid!');
-  })
+  });
 });
