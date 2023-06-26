@@ -1,5 +1,5 @@
-export class NavigateTo{
-  loginPage(){
+export class NavigateTo {
+  loginPage() {
     cy.visit(Cypress.env('login'));
   }
 }
