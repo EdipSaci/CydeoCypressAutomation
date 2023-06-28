@@ -2,28 +2,28 @@ name: Cydeo Cypress Tests
 
 on:
     schedule:
-      #schedule at 10:00 sunday
-      - cron: '0 10 * * sun'
-
+        # schedule at 10:00 sunday
+        - cron: '0 10 * * sun'
+    
     push:
         branches:
-          - main
+            - main
 
-jobs:
-  cypress-run:
-      runs-on: ubuntu-latest
-      container: cypress/browsers:node12.18.3-chrome87-ff82
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
-          
-        - name: Install Dependencies
-          run: npm install
-          
-        - name: Cypress Run
-          uses: cypress-io/github-actions@v4
-          with: 
-            #since we have insalled dependencies we set  it false
-            install: false
-            browser: chrome
-            spec: cypress/e2e/**/*
+jobs: 
+    cypress-run:
+        runs-on: ubuntu-latest
+        container: cypress/browser:node12.18.3-chrome87-ff82
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              
+            - name: Install Dependencies
+              run: npm install
+              
+            - name: Cypress Run
+              uses: cypress-io/github-action@v4
+              with:
+                # since we have installed dependencies we set it false
+                install: false
+                browser: chrome
+                spec: cypress/e2e/**/*
